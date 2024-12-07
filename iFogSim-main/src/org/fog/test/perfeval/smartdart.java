@@ -72,7 +72,7 @@ public class smartdart {
         }
     }
 
-    // Create Multiple DART Buoy Fog Devices
+    // Create multiple DART Buoy Fog Devices
     public static List<FogDevice> createMultipleSmartDartBuoys(int count) {
         List<FogDevice> smartDartBuoys = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
@@ -84,7 +84,7 @@ public class smartdart {
         return smartDartBuoys;
     }
 
-    // Create a Single DART Buoy FogDevice
+    // Create a single DART Buoy FogDevice
     private static FogDevice createSmartDartBuoy(String nodeName, long mips, int ram, long upBw, long downBw, int level, double ratePerMips, double busyPower, double idlePower) {
         List<Pe> peList = new ArrayList<>();
         peList.add(new Pe(0, new PeProvisionerOverbooking(mips)));
@@ -144,11 +144,11 @@ public class smartdart {
                 System.out.println("Pressure: " + pressure + " hPa");
                 System.out.println("Temperature: " + temperature + " °C");
 
-                // Fetch Thresholds from DynamoDB
+                // Fetch thresholds from DynamoDB
                 Double pressureThreshold = getThresholdValue("pressure", "High");
                 Double temperatureThreshold = getThresholdValue("temperature", "High");
 
-                // Trigger Lambda if both thresholds exceed
+                // Trigger Lambda function if both thresholds exceed
                 boolean isThresholdExceeded = false;
                 if (pressureThreshold != null && pressure > pressureThreshold 
                         && temperatureThreshold != null && temperature > temperatureThreshold) {
@@ -163,7 +163,7 @@ public class smartdart {
                             .put("message", "Tsunami Warning: Both thresholds exceeded!");
 
                     try {
-                        // Simulate bandwidth fluctuation by throttling Lambda invocation
+                        // Simulate bandwidth fluctuation by throttling Lambda function invocation
                         double networkBandwidth = simulateNetworkBandwidth();
                         Thread.sleep((long) (1024 / networkBandwidth * 1000)); // Adjust delay based on bandwidth
 
